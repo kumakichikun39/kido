@@ -1976,7 +1976,7 @@ async function runOptimization(forceProceed = false) {
 
   const optModeEl = document.querySelector('input[name="optMode"]:checked');
   if (!optModeEl) {
-    alert('整正方針（滑らかさ または 復元）を選択してください。');
+    alert('整正方針を選択してください。');
     return;
   }
   const optMode = optModeEl.value;
@@ -2004,7 +2004,7 @@ async function runOptimization(forceProceed = false) {
     }
   }
 
-  try {
+try {
     const highs = await getHighs();
     sweepResultsData = [];
 
@@ -2012,10 +2012,6 @@ async function runOptimization(forceProceed = false) {
       ymax: 0,
       mStar: m0,
       sumY: 0,
-      deltaM: 0,
-      deltaSumY: 0,
-      marginalEff: 0,
-      overallEff: 0,
       Y: new Array(k).fill(0),
       Z: [...X],
       baseline,
@@ -2027,25 +2023,31 @@ async function runOptimization(forceProceed = false) {
       diffIC: 0
     });
 
-    let prevM = m0;
-    let prevSumY = 0;
-
     for (let yVal = 1; yVal <= 15; yVal++) {
       runBtn.textContent = `計算処理中（${yVal}/15）…`;
+      await new Promise(resolve => setTimeout(resolve, 0));
+
       const lp = buildLP(X, baseline, fixedList, yVal, optMode, ALPHA);
-      const sol = highs.solve(lp);
+      const sol = highs.solve(lp, { presolve: "off" });
 
       if (sol.Status !== 'Optimal') continue;
 
-      const Y = [], Z = [];
+const Y = [], Z = [];
       let sumY = 0;
       for (let i = 1; i <= k; i++) {
-        const y_i = Math.round(sol.Columns[`Y${i}`].Primal);
+        const yCol = sol.Columns[`Y${i}`];
+        const zCol = sol.Columns[`Z${i}`];
+
+        // 万が一値が欠損していたら誤魔化さず即例外を投げてcatchに飛ばす
+        if (!yCol || yCol.Primal === undefined || !zCol || zCol.Primal === undefined) {
+          throw new Error(`地点${i}の計算結果がソルバーから取得できませんでした。`);
+        }
+
+        const y_i = Math.round(yCol.Primal);
         Y.push(y_i);
         sumY += y_i;
-        Z.push(sol.Columns[`Z${i}`].Primal);
+        Z.push(zCol.Primal);
       }
-
       let mStar = 0;
       if (optMode === 'smooth') {
         for (let i = 1; i < k; i++) {
@@ -2059,19 +2061,10 @@ async function runOptimization(forceProceed = false) {
         }
       }
 
-      const deltaM = prevM - mStar;
-      const deltaSumY = sumY - prevSumY;
-      const marginalEff = deltaSumY > 0 ? (deltaM / deltaSumY) : 0;
-      const overallEff = sumY > 0 ? ((m0 - mStar) / sumY) : 0;
-
       sweepResultsData.push({
         ymax: yVal,
         mStar,
         sumY,
-        deltaM,
-        deltaSumY,
-        marginalEff,
-        overallEff,
         Y,
         Z,
         baseline,
@@ -2082,9 +2075,6 @@ async function runOptimization(forceProceed = false) {
         C: 0,
         diffIC: 0
       });
-
-      prevM = mStar;
-      prevSumY = sumY;
     }
 
     const m15 = sweepResultsData[sweepResultsData.length - 1].mStar;
@@ -2819,11 +2809,27 @@ function al_addRows(n) {
     const tr = document.createElement('tr');
     tr.innerHTML =
       `<td class="center al-rowidx mono" style="font-weight:bold;color:var(--text-sub);">${al_formatPositionLabel(idx)}</td>` +
-      `<td><input type="number" class="al-xin" step="any" inputmode="decimal"></td>` +
+      `<td><div class="v-input-group"><button type="button" class="btn-sign al-btn-sign" title="符号反転">±</button><input type="number" class="al-xin" step="any" inputmode="decimal"></div></td>` +
       `<td><input type="number" class="al-vin" step="any" inputmode="decimal"></td>` +
       `<td class="center" style="width:26px; padding-right:0;"><input type="checkbox" class="fix-chk al-chk"></td>` +
       `<td style="padding-left:2px;"><input type="number" class="al-fix-val" value="0" step="1" disabled></td>` +
       `<td class="center"><button type="button" class="btn-del-row al-del" title="行削除">×</button></td>`;
+
+    // 読み値の符号反転（±）ボタン制御
+    const signBtn = tr.querySelector('.al-btn-sign');
+    const xin = tr.querySelector('.al-xin');
+    signBtn.addEventListener('click', () => {
+      const val = xin.value.trim();
+      if (val === '' || Number.isNaN(Number(val))) return;
+      if (val.startsWith('-')) {
+        xin.value = val.slice(1);
+      } else if (val.startsWith('+')) {
+        xin.value = '-' + val.slice(1);
+      } else {
+        xin.value = '-' + val;
+      }
+      xin.dispatchEvent(new Event('input', { bubbles: true }));
+    });
 
     const chk = tr.querySelector('.al-chk');
     const fval = tr.querySelector('.al-fix-val');
@@ -2847,7 +2853,6 @@ function al_addRows(n) {
   }
   al_saveDraftData();
 }
-
 // 始点・終点 自動固定処理
 function al_autoFixEndpoints() {
   const trs = Array.from(al_rowsBody.querySelectorAll('tr'));
@@ -3223,7 +3228,6 @@ function al_buildLP(X, baseline, fixedList, Ymax, mode = 'smooth', alpha = ALPHA
   }
   for (let i = 1; i <= k; i++) {
     lines.push(` Z${i} free`);
-    lines.push(` 0 <= D${i}`);
   }
 
   lines.push('General');
@@ -3298,27 +3302,31 @@ async function al_runOptimization(forceProceed = false) {
       diffIC: 0
     });
 
-    for (let yVal = 1; yVal <= 15; yVal++) {
+for (let yVal = 1; yVal <= 15; yVal++) {
       al_runBtn.textContent = `計算処理中（${yVal}/15）…`;
       await new Promise(resolve => setTimeout(resolve, 0));
 
       const lp = al_buildLP(X, baseline, fixedList, yVal, optMode, ALPHA);
-      const sol = highs.solve(lp);
+      const sol = highs.solve(lp, { presolve: "off" });
 
       if (sol.Status !== 'Optimal') continue;
 
-      const Y = [], Z = [];
+const Y = [], Z = [];
       let sumY = 0;
       for (let i = 1; i <= k; i++) {
         const wCol = sol.Columns[`W${i}`];
-        // 0を正しく0として評価する安全な取り出し
-        const w_i = Math.round(wCol !== undefined && wCol.Primal !== undefined ? wCol.Primal : yVal);
+        const zCol = sol.Columns[`Z${i}`];
+
+        // 万が一値が欠損していたら誤魔化さず即例外を投げてcatchに飛ばす
+        if (!wCol || wCol.Primal === undefined || !zCol || zCol.Primal === undefined) {
+          throw new Error(`地点${i}の計算結果がソルバーから取得できませんでした。`);
+        }
+
+        const w_i = Math.round(wCol.Primal);
         const y_i = w_i - yVal;
         Y.push(y_i);
         sumY += Math.abs(y_i);
-        
-        const zCol = sol.Columns[`Z${i}`];
-        Z.push(zCol !== undefined && zCol.Primal !== undefined ? zCol.Primal : 0);
+        Z.push(zCol.Primal);
       }
 
       let mStar = 0;
