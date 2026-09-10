@@ -782,6 +782,9 @@
         <div class="chart-container">
           <canvas id="al_curveChart" width="800" height="200"></canvas>
         </div>
+        <div style="font-size:11.5px; color:var(--text-sub); margin-top:4px; margin-bottom:4px; line-height:1.4;">
+          ※改善効果が100%に達した後の区間（背景着色部）は、許容整正量の余力を使って前後の滑らかさを改善している状態を示します。
+        </div>
         <div class="legend" style="margin-bottom:12px;">
           <span><i class="swatch" style="background:#007bff;"></i>改善効果</span>
           <span><i class="swatch" style="background:#fd7e14;"></i>施工負担</span>
@@ -959,6 +962,9 @@
         <div class="chart-container">
           <canvas id="curveChart" width="800" height="200"></canvas>
         </div>
+        <div style="font-size:11.5px; color:var(--text-sub); margin-top:4px; margin-bottom:4px; line-height:1.4;">
+          ※改善効果が100%に達した後の区間（背景着色部）は、許容高上量の余力を使って前後の滑らかさを改善している状態を示します。
+        </div>
         <div class="legend" style="margin-bottom:12px;">
           <span><i class="swatch" style="background:#007bff;"></i>改善効果</span>
           <span><i class="swatch" style="background:#fd7e14;"></i>施工負担</span>
@@ -1131,7 +1137,7 @@
         <div class="term" style="font-size:12.5px; color:#1e7e34;">・滑らかさ・乗り心地（推奨）</div>
         <div class="desc" style="margin-bottom:6px;">隣り合う地点間における「基準値との差」の変化量の総和を最小限に抑える計算を行います。前後の通り変化を緩やかにつなぐことで、列車の揺れを抑え、乗り心地を向上させます。</div>
         <div class="term" style="font-size:12.5px; color:#1e7e34;">・計画線形への復元</div>
-        <div class="desc">各地点における「基準値との差」の総和を最小限に抑える計算を行います。狂いが蓄積した区間を設計通りの線形へ戻すことを優先します（整正量は大きくなりやすい傾向があります）。</div>
+        <div class="desc">各地点における「基準値との差」の総和を最小限に抑える計算を行います。狂いが蓄積した区間を設計通りの線形へ戻すことを優先します（整正量は大きくなりやすい傾向があります）。<br><span style="color:var(--text-sub); font-size:11.5px;">※改善効果が上限（100%）に達した後も、許容整正量の範囲内で前後の滑らかさの改善が行われます。</span></div>
       </div>
     </div>
 
@@ -1225,7 +1231,7 @@
 
     <div class="help-item">
       <div class="term">・改善効果（%）</div>
-      <div class="desc">未施工を 0%、許容整正量を ±15mm とした場合に得られる最大改善量を 100%としたときの改善達成率です。例えば改善効果 80%は、「最大改善量の 80%まで改善できている」ことを意味します。</div>
+      <div class="desc">未施工を 0%、許容整正量を ±15mm とした場合に得られる評価値の最大改善量を 100%としたときの改善達成率です。例えば改善効果 80%は、「最大改善量の 80%まで改善できている」ことを意味します。<br><span style="color:var(--text-sub); font-size:11.5px;">※計画線形への復元方針において、前後の滑らかさは副目的として計算されるため、この改善効果（%）の数値には直接反映されません（改善効果が100%に達した後も、滑らかさを向上させるための施工が行われるのはこのためです）。</span></div>
     </div>
 
     <div class="help-item">
@@ -1265,7 +1271,7 @@
         <div class="term" style="font-size:12.5px; color:#0056b3;">・滑らかさ・乗り心地（推奨）</div>
         <div class="desc" style="margin-bottom:6px;">隣り合う地点間における「基準値との差」の変化量の総和を最小限に抑える計算を行います。前後の高低差を緩やかにつなぐことで、列車の突き上げや沈み込みを抑え、乗り心地を向上させます。</div>
         <div class="term" style="font-size:12.5px; color:#0056b3;">・計画線形への復元</div>
-        <div class="desc">各地点における「基準値との差」の総和を最小限に抑える計算を行います。狂いが蓄積した区間を設計通りの線形へ戻すことを優先します（高上量は大きくなりやすい傾向があります）。</div>
+        <div class="desc">各地点における「基準値との差」の総和を最小限に抑える計算を行います。狂いが蓄積した区間を設計通りの線形へ戻すことを優先します（高上量は大きくなりやすい傾向があります）。<br><span style="color:var(--text-sub); font-size:11.5px;">※改善効果が上限（100%）に達した後も、許容高上量の範囲内で前後の滑らかさの改善が行われます。</span></div>
       </div>
     </div>
 
@@ -1358,7 +1364,7 @@
 
     <div class="help-item">
       <div class="term">・改善効果（%）</div>
-      <div class="desc">未施工を 0%、許容高上量を 15mm とした場合に得られる最大改善量を 100%としたときの改善達成率です。例えば改善効果 80%は、「最大改善量の 80%まで改善できている」ことを意味します。</div>
+      <div class="desc">未施工を 0%、許容高上量を 15mm とした場合に得られる評価値の最大改善量を 100%としたときの改善達成率です。例えば改善効果 80%は、「最大改善量の 80%まで改善できている」ことを意味します。<br><span style="color:var(--text-sub); font-size:11.5px;">※計画線形への復元方針において、前後の滑らかさは副目的として計算されるため、この改善効果（%）の数値には直接反映されません（改善効果が100%に達した後も、滑らかさを向上させるための施工が行われるのはこのためです）。</span></div>
     </div>
 
     <div class="help-item">
@@ -1912,10 +1918,15 @@ function buildLP(X, baseline, fixedList, Ymax, mode = 'smooth', alpha = ALPHA) {
   const objTerms = [];
   if (mode === 'smooth') {
     for (let i = 2; i <= k; i++) objTerms.push(`U${i}`);
+    for (let i = 1; i <= k; i++) objTerms.push(`${alpha} Y${i}`);
   } else {
+    // 主目的：基準値との差の総和（重み 1.0）
     for (let i = 1; i <= k; i++) objTerms.push(`U${i}`);
+    // 副目的（タイブレーク）：前後の滑らかさ（重み 0.01）
+    for (let i = 2; i <= k; i++) objTerms.push(`0.01 S${i}`);
+    // 第3目的：余計な施工量の削減（重み 0.0001）
+    for (let i = 1; i <= k; i++) objTerms.push(`0.0001 Y${i}`);
   }
-  for (let i = 1; i <= k; i++) objTerms.push(`${alpha} Y${i}`);
   lines.push(' obj: ' + objTerms.join(' + '));
 
   lines.push('Subject To');
@@ -1933,10 +1944,17 @@ function buildLP(X, baseline, fixedList, Ymax, mode = 'smooth', alpha = ALPHA) {
       lines.push(` absN${i}: U${i} + Z${i} - Z${i - 1} >= ${deltaB}`);
     }
   } else {
+    // 復元（基準値との差）の絶対値制約
     for (let i = 1; i <= k; i++) {
       const B = baseline[i - 1];
       lines.push(` absP${i}: U${i} - Z${i} >= ${-B}`);
       lines.push(` absN${i}: U${i} + Z${i} >= ${B}`);
+    }
+    // 滑らかさ（前後の変化量）の絶対値制約
+    for (let i = 2; i <= k; i++) {
+      const deltaB = baseline[i - 1] - baseline[i - 2];
+      lines.push(` absSP${i}: S${i} - Z${i} + Z${i - 1} >= ${-deltaB}`);
+      lines.push(` absSN${i}: S${i} + Z${i} - Z${i - 1} >= ${deltaB}`);
     }
   }
 
@@ -2028,7 +2046,7 @@ try {
       await new Promise(resolve => setTimeout(resolve, 0));
 
       const lp = buildLP(X, baseline, fixedList, yVal, optMode, ALPHA);
-      const sol = highs.solve(lp, { presolve: "off" });
+      const sol = highs.solve(lp, { presolve: "off", mip_abs_gap: 0, mip_rel_gap: 0 });
 
       if (sol.Status !== 'Optimal') continue;
 
@@ -2228,6 +2246,22 @@ window.selectPlanCard = (idx) => {
 
 function renderSweepTable(data, plans) {
   sweepBody.innerHTML = '';
+
+  // 復元モード時の滑らかさ改善区間（復元100%到達点 〜 施工負担上限到達点）を特定
+  const isTarget = (data.length > 0 && data[0].optMode === 'target');
+  let recov100Idx = -1;
+  let maxCIdx = -1;
+  if (isTarget) {
+    for (let i = 1; i < data.length; i++) {
+      if (data[i].I >= 0.9999) { recov100Idx = i; break; }
+    }
+    if (recov100Idx !== -1) {
+      for (let i = recov100Idx; i < data.length; i++) {
+        if (data[i].C >= 0.9999) { maxCIdx = i; break; }
+      }
+    }
+  }
+
   data.forEach((row, idx) => {
     const tr = document.createElement('tr');
     tr.id = `sweep-row-${idx}`;
@@ -2245,6 +2279,8 @@ function renderSweepTable(data, plans) {
         badgeHtml = `<span class="badge badge-prec">◎高精度案</span>`;
       } else if (isBal) {
         badgeHtml = `<span class="badge badge-bal">★バランス案</span>`;
+      } else if (isTarget && recov100Idx !== -1 && maxCIdx !== -1 && idx > recov100Idx && idx <= maxCIdx) {
+        badgeHtml = `<span class="badge" style="background:#e1f5fe; color:#0277bd; border:1px solid #b3e5fc;">⛸️ 滑らかさ改善中</span>`;
       }
     }
 
@@ -2373,6 +2409,63 @@ function drawCurveChart(data, plans) {
 
   const xAt = (i) => margin.left + (i / (n - 1)) * pw;
   const yAt = (rate) => margin.top + ph - rate * ph;
+
+  // === 背景ハイライト帯（滑らかさ改善中区間） ===
+  const isTarget = (data.length > 0 && data[0].optMode === 'target');
+  let recov100Idx = -1;
+  let maxCIdx = -1;
+  if (isTarget) {
+    for (let i = 1; i < data.length; i++) {
+      if (data[i].I >= 0.9999) { recov100Idx = i; break; }
+    }
+    if (recov100Idx !== -1) {
+      for (let i = recov100Idx; i < data.length; i++) {
+        if (data[i].C >= 0.9999) { maxCIdx = i; break; }
+      }
+    }
+  }
+
+  if (isTarget && recov100Idx !== -1 && maxCIdx > recov100Idx) {
+    const bandX1 = xAt(recov100Idx);
+    const bandX2 = xAt(maxCIdx);
+    const bandW = bandX2 - bandX1;
+
+    // 背景帯（アイスブルー透過）
+    ctx.fillStyle = 'rgba(2, 136, 209, 0.08)';
+    ctx.fillRect(bandX1, margin.top, bandW, ph);
+
+    // 左右境界線（氷の境界破線）
+    ctx.save();
+    ctx.strokeStyle = 'rgba(2, 136, 209, 0.35)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath();
+    ctx.moveTo(bandX1, margin.top);
+    ctx.lineTo(bandX1, margin.top + ph);
+    ctx.moveTo(bandX2, margin.top);
+    ctx.lineTo(bandX2, margin.top + ph);
+    ctx.stroke();
+    ctx.restore();
+
+    // 帯内ラベル
+    const labelText = '⛸️ 滑らかさ改善中';
+    ctx.save();
+    ctx.font = 'bold 10px sans-serif';
+    const textW = ctx.measureText(labelText).width;
+    const labelX = Math.min(margin.left + pw - textW / 2 - 4, Math.max(margin.left + textW / 2 + 4, bandX1 + bandW / 2));
+    const labelY = margin.top + 16;
+
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+    ctx.fillRect(labelX - textW / 2 - 4, labelY - 10, textW + 8, 14);
+    ctx.strokeStyle = 'rgba(2, 136, 209, 0.4)';
+    ctx.lineWidth = 0.8;
+    ctx.strokeRect(labelX - textW / 2 - 4, labelY - 10, textW + 8, 14);
+
+    ctx.fillStyle = '#0277bd';
+    ctx.textAlign = 'center';
+    ctx.fillText(labelText, labelX, labelY);
+    ctx.restore();
+  }
 
   ctx.fillStyle = '#444444';
   ctx.font = 'bold 10.5px sans-serif';
@@ -3164,12 +3257,14 @@ function al_buildLP(X, baseline, fixedList, Ymax, mode = 'smooth', alpha = ALPHA
   const objTerms = [];
   if (mode === 'smooth') {
     for (let i = 2; i <= k; i++) objTerms.push(`U${i}`);
+    for (let i = 1; i <= k; i++) objTerms.push(`${alpha} D${i}`);
   } else {
+    // 主目的：基準値との差の総和（重み 1.0）
     for (let i = 1; i <= k; i++) objTerms.push(`U${i}`);
-  }
-  // 総整正量 |Y_i| = |W_i - Ymax| の微小ペナルティ D_i
-  for (let i = 1; i <= k; i++) {
-    objTerms.push(`${alpha} D${i}`);
+    // 副目的（タイブレーク）：前後の滑らかさ（重み 0.01）
+    for (let i = 2; i <= k; i++) objTerms.push(`0.01 S${i}`);
+    // 第3目的：余計な施工量の削減（重み 0.0001）
+    for (let i = 1; i <= k; i++) objTerms.push(`0.0001 D${i}`);
   }
   lines.push(' obj: ' + objTerms.join(' + '));
 
@@ -3182,20 +3277,20 @@ function al_buildLP(X, baseline, fixedList, Ymax, mode = 'smooth', alpha = ALPHA
     if (i - 1 >= 1) {
       terms.push(`+ 0.5 W${i - 1}`);
     } else {
-      rhsOffset -= 0.5 * Ymax; // 始点外側の相殺不足分
+      rhsOffset -= 0.5 * Ymax;
     }
 
     if (i + 1 <= k) {
       terms.push(`+ 0.5 W${i + 1}`);
     } else {
-      rhsOffset -= 0.5 * Ymax; // 終点外側の相殺不足分
+      rhsOffset -= 0.5 * Ymax;
     }
 
     const rhs = Math.round((X[i - 1] + rhsOffset) * 1000) / 1000;
     lines.push(` eqZ${i}: ${terms.join(' ')} = ${rhs}`);
   }
 
-  // 整正方針の評価値線形化 (U_i)
+  // 整正方針の評価値線形化
   if (mode === 'smooth') {
     for (let i = 2; i <= k; i++) {
       const deltaB = baseline[i - 1] - baseline[i - 2];
@@ -3203,10 +3298,17 @@ function al_buildLP(X, baseline, fixedList, Ymax, mode = 'smooth', alpha = ALPHA
       lines.push(` absN${i}: U${i} + Z${i} - Z${i - 1} >= ${deltaB}`);
     }
   } else {
+    // 復元（基準値との差）の絶対値制約
     for (let i = 1; i <= k; i++) {
       const B = baseline[i - 1];
       lines.push(` absP${i}: U${i} - Z${i} >= ${-B}`);
       lines.push(` absN${i}: U${i} + Z${i} >= ${B}`);
+    }
+    // 滑らかさ（前後の変化量）の絶対値制約
+    for (let i = 2; i <= k; i++) {
+      const deltaB = baseline[i - 1] - baseline[i - 2];
+      lines.push(` absSP${i}: S${i} - Z${i} + Z${i - 1} >= ${-deltaB}`);
+      lines.push(` absSN${i}: S${i} + Z${i} - Z${i - 1} >= ${deltaB}`);
     }
   }
 
@@ -3307,7 +3409,7 @@ for (let yVal = 1; yVal <= 15; yVal++) {
       await new Promise(resolve => setTimeout(resolve, 0));
 
       const lp = al_buildLP(X, baseline, fixedList, yVal, optMode, ALPHA);
-      const sol = highs.solve(lp, { presolve: "off" });
+      const sol = highs.solve(lp, { presolve: "off", mip_abs_gap: 0, mip_rel_gap: 0 });
 
       if (sol.Status !== 'Optimal') continue;
 
@@ -3509,6 +3611,22 @@ window.al_selectPlanCard = (idx) => {
 // 詳細データテーブル生成
 function al_renderSweepTable(data, plans) {
   al_sweepBody.innerHTML = '';
+
+  // 復元モード時の滑らかさ改善区間（復元100%到達点 〜 施工負担上限到達点）を特定
+  const isTarget = (data.length > 0 && data[0].optMode === 'target');
+  let recov100Idx = -1;
+  let maxCIdx = -1;
+  if (isTarget) {
+    for (let i = 1; i < data.length; i++) {
+      if (data[i].I >= 0.9999) { recov100Idx = i; break; }
+    }
+    if (recov100Idx !== -1) {
+      for (let i = recov100Idx; i < data.length; i++) {
+        if (data[i].C >= 0.9999) { maxCIdx = i; break; }
+      }
+    }
+  }
+
   data.forEach((row, idx) => {
     const tr = document.createElement('tr');
     tr.id = `al-sweep-row-${idx}`;
@@ -3526,6 +3644,8 @@ function al_renderSweepTable(data, plans) {
         badgeHtml = `<span class="badge badge-prec">◎高精度案</span>`;
       } else if (isBal) {
         badgeHtml = `<span class="badge badge-bal">★バランス案</span>`;
+      } else if (isTarget && recov100Idx !== -1 && maxCIdx !== -1 && idx > recov100Idx && idx <= maxCIdx) {
+        badgeHtml = `<span class="badge" style="background:#e1f5fe; color:#0277bd; border:1px solid #b3e5fc;">⛸️ 滑らかさ改善中</span>`;
       }
     }
 
@@ -3567,6 +3687,63 @@ function al_drawCurveChart(data, plans) {
 
   const xAt = (i) => margin.left + (i / (n - 1)) * pw;
   const yAt = (rate) => margin.top + ph - rate * ph;
+
+  // === 背景ハイライト帯（滑らかさ改善中区間） ===
+  const isTarget = (data.length > 0 && data[0].optMode === 'target');
+  let recov100Idx = -1;
+  let maxCIdx = -1;
+  if (isTarget) {
+    for (let i = 1; i < data.length; i++) {
+      if (data[i].I >= 0.9999) { recov100Idx = i; break; }
+    }
+    if (recov100Idx !== -1) {
+      for (let i = recov100Idx; i < data.length; i++) {
+        if (data[i].C >= 0.9999) { maxCIdx = i; break; }
+      }
+    }
+  }
+
+  if (isTarget && recov100Idx !== -1 && maxCIdx > recov100Idx) {
+    const bandX1 = xAt(recov100Idx);
+    const bandX2 = xAt(maxCIdx);
+    const bandW = bandX2 - bandX1;
+
+    // 背景帯（アイスブルー透過）
+    ctx.fillStyle = 'rgba(2, 136, 209, 0.08)';
+    ctx.fillRect(bandX1, margin.top, bandW, ph);
+
+    // 左右境界線（氷の境界破線）
+    ctx.save();
+    ctx.strokeStyle = 'rgba(2, 136, 209, 0.35)';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath();
+    ctx.moveTo(bandX1, margin.top);
+    ctx.lineTo(bandX1, margin.top + ph);
+    ctx.moveTo(bandX2, margin.top);
+    ctx.lineTo(bandX2, margin.top + ph);
+    ctx.stroke();
+    ctx.restore();
+
+    // 帯内ラベル
+    const labelText = '⛸️ 滑らかさ改善中';
+    ctx.save();
+    ctx.font = 'bold 10px sans-serif';
+    const textW = ctx.measureText(labelText).width;
+    const labelX = Math.min(margin.left + pw - textW / 2 - 4, Math.max(margin.left + textW / 2 + 4, bandX1 + bandW / 2));
+    const labelY = margin.top + 16;
+
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+    ctx.fillRect(labelX - textW / 2 - 4, labelY - 10, textW + 8, 14);
+    ctx.strokeStyle = 'rgba(2, 136, 209, 0.4)';
+    ctx.lineWidth = 0.8;
+    ctx.strokeRect(labelX - textW / 2 - 4, labelY - 10, textW + 8, 14);
+
+    ctx.fillStyle = '#0277bd';
+    ctx.textAlign = 'center';
+    ctx.fillText(labelText, labelX, labelY);
+    ctx.restore();
+  }
 
   ctx.fillStyle = '#444444';
   ctx.font = 'bold 10.5px sans-serif';
